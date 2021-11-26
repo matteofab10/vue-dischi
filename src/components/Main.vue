@@ -1,30 +1,44 @@
 <template>
   <div class="main-background">
     <div class="container album-container">
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
-        <Album />
+        <Album 
+        v-for="(album, index) in albums"
+        :key="index"
+        :albums="album"/>
     </div>
   </div>
 </template>
 
 <script>
 
-
+import axios from "axios";
 import Album from './Album.vue';
 
 
 export default {
   name: "Main",
   components: {
-    Album,
+    Album
+  },
+  data(){
+    return{
+      albums: [],
+      apiUrl: "https://flynn.boolean.careers/exercises/api/array/music"
+    }
+  },
+  methods:{
+    getApi(){
+      axios.get(this.apiUrl)
+        .then( r => {
+          this.albums = r.data.response;
+        })
+        .catch( e => {
+          console.log(e);
+        })
+    }
+  },
+    mounted(){
+    this.getApi();
   }
 }
 </script>
@@ -33,13 +47,13 @@ export default {
   @import "../assets/style/vars.scss";
 
   .main-background {
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     background-color: #1e2d3b;
     color: white;
     .album-container {
       display: flex;
       flex-wrap: wrap;
-      padding-top: 40px;
+      padding-top: 50px;
     }
   }
 

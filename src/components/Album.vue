@@ -1,15 +1,18 @@
 <template>
   <div class="album-box">
-    <img src="https://www.onstageweb.com/wp-content/uploads/2018/09/bon-jovi-new-jersey.jpg" alt="bon-jovi">
-    <h2>new jersey</h2>
-    <h4>Bon Jovi</h4>
-    <h4>1988</h4>
+    <img :src="albums.poster" :alt="albums.title">
+    <h2>{{albums.title}}</h2>
+    <h3>{{albums.author}}</h3>
+    <h3>{{albums.year}}</h3>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Album',
+  props:{
+    albums: Object
+  }
 }
 </script>
 
@@ -33,8 +36,8 @@ export default {
     color: white;
     margin-bottom: 10px;
   }
-  h4 {
-    font-size: 15px;
+  h3 {
+    font-size: 20px;
     font-weight: 500;
     color: grey;
   }
