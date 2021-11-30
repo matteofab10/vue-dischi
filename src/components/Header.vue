@@ -3,20 +3,28 @@
     <div class="logo-spotify">  
       <img src="../assets/spotify-logo.png" alt="logo-spotify">
     </div>
-    <div>
-      <Selected />
-    </div>
+
+    <select class="selection" v-model="genre" @change="$emit('changeGenre', genre)">
+      <option value="" selected>Seleziona il tuo genere</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Pop">Pop</option>
+      <option value="Metal">Metal</option>
+      <option value="Rock">Rock</option>
+    </select>
   </header>
 </template>
 
 <script>
 
-import Selected from './Selected.vue';
-
 export default {
   name: "Header",
-  components: {
-    Selected,
+  props: {
+
+  },
+  data(){
+    return {
+      genre: ''
+    }
   },
 }
 </script>
@@ -39,7 +47,10 @@ export default {
       margin-left: 15px;
       cursor: pointer;
     }
-  
+    .selection{
+      height: 30px;
+      margin-right: 15px;
+    }
   }
   
 
